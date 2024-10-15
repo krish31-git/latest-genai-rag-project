@@ -74,16 +74,16 @@ def deploy_flow(endpoint_name, deployment_name):
     deployment = ManagedOnlineDeployment(
         name=deployment_name,
         endpoint_name=endpoint_name,
-        model=Model(
-            name="rag_flow",
-            path=flow_path,  # path to promptflow folder
-            properties=[ # this enables the chat interface in the endpoint test tab
-                ["azureml.promptflow.source_flow_id", "basic-chat"],
-                ["azureml.promptflow.mode", "chat"],
-                ["azureml.promptflow.chat_input", "chat_input"],
-                ["azureml.promptflow.chat_output", "reply"]
-            ]
-        ),
+     model = Model(
+         name="ragwithtrace",
+         path=flow_path,  # path to the promptflow folder
+         properties=[  # enables the chat interface in the endpoint test tab
+             ["azureml.promptflow.source_flow_id", "ragwithtrace"],
+             ["azureml.promptflow.mode", "chat"],
+             ["azureml.promptflow.chat_input", "question"],
+             ["azureml.promptflow.chat_output", "answer"]
+         ]
+     ),
         environment=Environment(
             build=BuildContext(
                 path=flow_path,
